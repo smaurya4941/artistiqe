@@ -44,7 +44,8 @@ Route::group([ 'middleware' => ['isPreorder', ]], function () {
         });
 
         // Preorder Products
-        Route::resource('preorder-product', PreorderProductController::class);
+        Route::resource('preorder-product', PreorderProductController::class)
+            ->except(['edit', 'destroy', 'show']);
         Route::controller(PreorderProductController::class)->group(function () {
             Route::get('/preorder-product/edit/{id}', 'edit')->name('preorder-product.edit');
             Route::get('/preorder-product/destroy/{id}', 'destroy')->name('preorder-product.destroy');
@@ -88,7 +89,8 @@ Route::group([ 'middleware' => ['isPreorder', ]], function () {
         });
 
         // FAQs
-        Route::resource('faqs', FaqController::class);
+        Route::resource('faqs', FaqController::class)
+            ->except(['edit', 'destroy', 'show']);
         Route::controller(FaqController::class)->group(function () {
             Route::get('/faq/edit/{id}', 'edit')->name('faq.edit');
             Route::post('/faq/update-status', 'updateStatus')->name('faq.update-status');
@@ -110,7 +112,8 @@ Route::group([ 'middleware' => ['isPreorder', ]], function () {
         });
 
         // Notification Types 
-        Route::resource('preorder-notification-types', NotificationTypeController::class);
+        Route::resource('preorder-notification-types', NotificationTypeController::class)
+            ->except(['edit', 'show']);
         Route::controller(NotificationTypeController::class)->group(function () {
             Route::get('/preorder-notification/edit/{id}', 'edit')->name('preorder.notification-type.edit');
         });
@@ -129,7 +132,8 @@ Route::group([ 'middleware' => ['isPreorder', ]], function () {
             Route::post('/preorder-instruction-update', 'updatePreorderInstruction')->name('preorder-instruction-update');
         });
 
-        Route::resource('preorder-product', SellerPreorderProductController::class);  
+        Route::resource('preorder-product', SellerPreorderProductController::class)
+            ->except(['edit', 'destroy', 'show']);
         Route::controller(SellerPreorderProductController::class)->group(function () {
             Route::get('/preorder-product/edit/{id}', 'edit')->name('preorder-product.edit');
             Route::get('/preorder-product/destroy/{id}', 'destroy')->name('preorder-product.destroy');
