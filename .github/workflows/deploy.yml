@@ -1,0 +1,25 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to cPanel
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USER }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          script: |
+            cd /home/artistiqe/artistiqe-dev
+            git pull --ff-only origin main
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan view:cache

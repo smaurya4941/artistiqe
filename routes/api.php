@@ -248,30 +248,32 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
 
     Route::get('seller/top', 'App\Http\Controllers\Api\V2\SellerController@topSellers');
 
-    Route::apiResource('banners', 'App\Http\Controllers\Api\V2\BannerController')->only('index');
+    Route::get('banners', 'App\Http\Controllers\Api\V2\BannerController@index');
 
     Route::get('brands/top', 'App\Http\Controllers\Api\V2\BrandController@top');
     Route::get('all-brands', [ProductController::class, 'getBrands'])->name('allBrands');
-    Route::apiResource('brands', 'App\Http\Controllers\Api\V2\BrandController')->only('index');
+    Route::get('brands', 'App\Http\Controllers\Api\V2\BrandController@index');
 
-    Route::apiResource('business-settings', 'App\Http\Controllers\Api\V2\BusinessSettingController')->only('index');
+    Route::get('business-settings', 'App\Http\Controllers\Api\V2\BusinessSettingController@index');
 
     Route::get('category/info/{slug}', 'App\Http\Controllers\Api\V2\CategoryController@info');
     Route::get('categories/featured', 'App\Http\Controllers\Api\V2\CategoryController@featured');
     Route::get('categories/home', 'App\Http\Controllers\Api\V2\CategoryController@home');
     Route::get('categories/top', 'App\Http\Controllers\Api\V2\CategoryController@top');
-    Route::apiResource('categories', 'App\Http\Controllers\Api\V2\CategoryController')->only('index');
+    Route::apiResource('categories', 'App\Http\Controllers\Api\V2\CategoryController')
+        ->only('index')
+        ->names(['index' => 'api.categories.index']);
     Route::get('sub-categories/{id}', 'App\Http\Controllers\Api\V2\SubCategoryController@index')->name('subCategories.index');
 
-    Route::apiResource('colors', 'App\Http\Controllers\Api\V2\ColorController')->only('index');
+    Route::get('colors', 'App\Http\Controllers\Api\V2\ColorController@index');
 
-    Route::apiResource('currencies', 'App\Http\Controllers\Api\V2\CurrencyController')->only('index');
+    Route::get('currencies', 'App\Http\Controllers\Api\V2\CurrencyController@index');
 
-    Route::apiResource('customers', 'App\Http\Controllers\Api\V2\CustomerController')->only('show');
+    Route::get('customers/{customer}', 'App\Http\Controllers\Api\V2\CustomerController@show');
 
-    Route::apiResource('general-settings', 'App\Http\Controllers\Api\V2\GeneralSettingController')->only('index');
+    Route::get('general-settings', 'App\Http\Controllers\Api\V2\GeneralSettingController@index');
 
-    Route::apiResource('home-categories', 'App\Http\Controllers\Api\V2\HomeCategoryController')->only('index');
+    Route::get('home-categories', 'App\Http\Controllers\Api\V2\HomeCategoryController@index');
 
 
 
@@ -294,7 +296,8 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
     Route::get('products/search', 'App\Http\Controllers\Api\V2\ProductController@search');
     Route::post('products/variant/price', 'App\Http\Controllers\Api\V2\ProductController@getPrice');
     Route::get('products/digital', 'App\Http\Controllers\Api\V2\ProductController@digital')->name('products.digital');
-    Route::apiResource('products', 'App\Http\Controllers\Api\V2\ProductController')->except(['store', 'update', 'destroy']);
+    Route::get('products', 'App\Http\Controllers\Api\V2\ProductController@index');
+    Route::get('products/{product}', 'App\Http\Controllers\Api\V2\ProductController@show')->name('products.show');
 
     Route::get('products/{slug}/{user_id}',  'App\Http\Controllers\Api\V2\ProductController@product_details');
 
@@ -316,7 +319,7 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
     Route::get('shops/products/featured/{id}', 'App\Http\Controllers\Api\V2\ShopController@featuredProducts')->name('shops.featuredProducts');
     Route::get('shops/products/new/{id}', 'App\Http\Controllers\Api\V2\ShopController@newProducts')->name('shops.newProducts');
     Route::get('shops/brands/{id}', 'App\Http\Controllers\Api\V2\ShopController@brands')->name('shops.brands');
-    Route::apiResource('shops', 'App\Http\Controllers\Api\V2\ShopController')->only('index');
+    Route::get('shops', 'App\Http\Controllers\Api\V2\ShopController@index');
 
     Route::get('sliders', 'App\Http\Controllers\Api\V2\SliderController@sliders');
     Route::get('banners-one', 'App\Http\Controllers\Api\V2\SliderController@bannerOne');
