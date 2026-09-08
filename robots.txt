@@ -1,0 +1,4 @@
+User-agent:*
+Disalow:/wp-admin/
+Sitemap:https://dev.artistiqe.com/sitemap.xml
+Sitemap:https://dev.artistiqe.com/?sitemap.xml

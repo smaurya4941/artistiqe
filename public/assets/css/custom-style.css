@@ -1,0 +1,1676 @@
+/* General popup container */
+.website-popup .modal-dialog {
+    max-width: 800px;        /* wider for horizontal images */
+    width: 95%;              
+    margin: auto;
+    display: flex;
+    align-items: center;
+    min-height: 100vh; 
+}
+
+/* Content box */
+.website-popup .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;        /* only vertical scroll if needed */
+    overflow-x: hidden;      /* no horizontal scrollbar */
+    border-radius: 12px;
+    padding: 1rem;
+    position: relative;      /* for close button positioning */
+}
+
+/* Popup image */
+.website-popup img {
+    max-width: 100%;
+    max-height: 80vh;        /* adjust for smaller popup */
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Close button fix */
+.website-popup .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 1050;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    opacity: 1;
+}
+.website-popup .close:hover {
+    color: #000;
+    opacity: 0.8;
+}
+
+/* Responsive tweak */
+@media (max-width: 576px) {
+    .website-popup .modal-dialog {
+        max-width: 95%;
+    }
+
+    .website-popup img {
+        max-height: 60vh;   /* reduce on mobile */
+    }
+}
+
+
+/* Sidebar background color red */
+.aiz-sidebar-wrap,
+.aiz-sidebar {
+    background-color: #e62e04;
+}
+
+/* Sidebar text & icons white for contrast */
+.aiz-sidebar a,
+.aiz-sidebar span {
+    color: #ffffff !important;
+}
+
+/* Hover effect for menu items */
+.aiz-sidebar a:hover {
+    background-color: #b71c02 !important; /* darker red on hover */
+    color: #ffffff !important;
+}
+
+
+
+
+/* === SPACING FIX BETWEEN HEADER + BODY === */
+section.pt-4.mb-4 {
+  margin-bottom: .2rem !important;  /* reduce gap */
+  padding-top: 1rem !important;     /* smaller top padding */
+}
+section.mb-4 {
+  margin-top: 0 !important;         /* remove double space */
+  margin-bottom: 1rem;              /* keep bottom breathing */
+}
+
+/* beats .text-secondary-base by using a combined selector */
+a.text-secondary-base.apply-now-link,
+a.text-secondary-base.apply-now-link:visited,
+a.text-secondary-base.apply-now-link:hover,
+a.text-secondary-base.apply-now-link:active {
+  color: #E58333 !important;
+}
+
+
+
+.home-banner-area {
+    margin-top: 2rem !important;
+}
+
+
+
+/* ===== Footer: responsive 5/4/3/2/1 layout ===== */
+.footer-rows {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
+.footer-col {
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-top: 1rem;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* ≥576px: 2 per row */
+@media (min-width:576px){
+  .footer-col { flex-basis:50%; max-width:50%; }
+}
+
+/* ≥768px: 3 per row */
+@media (min-width:768px){
+  .footer-col { flex-basis:33.333%; max-width:33.333%; }
+}
+
+/* ≥992px: 4 per row */
+@media (min-width:992px){
+  .footer-col { flex-basis:25%; max-width:25%; }
+}
+
+/* ≥1200px: 5 per row */
+@media (min-width:1200px){
+  .footer-col { flex-basis:20%; max-width:20%; }
+}
+
+/* Optional: tidy list spacing */
+.footer-widget .list-unstyled li {
+  line-height: 1.4;
+}
+
+/* Main section */
+.category-links {
+  margin-top: 0;
+  padding: 40px 16px;
+  background-color: #e6e3d8;
+}
+
+/* Flex container for links */
+.category-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;                 /* wrap on small screens */
+  justify-content: center;
+  gap: clamp(12px, 2.5vw, 32px);   /* responsive spacing */
+  max-width: 1200px;
+  margin: 0 auto 20px;
+}
+
+/* Individual links */
+.category-link {
+  position: relative;                
+  font-size: clamp(18px, 4vw, 48px); /* better scaling */
+  line-height: 1.1;
+  font-weight: 300;
+  color: #423e31;
+  text-decoration: none;
+  padding: 4px 2px;
+  transition: color .25s ease;
+  white-space: normal;               /* allow wrapping on small screens */
+}
+
+/* Hover underline effect */
+.category-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.category-link:hover::after,
+.category-link:focus::after {
+  width: 100%;
+}
+
+.category-link:hover,
+.category-link:focus {
+  color: #e62e04;
+}
+
+.category-link:focus-visible {
+  outline: 2px dashed #7c6f57;
+  outline-offset: 3px;
+}
+
+/* Description */
+.collection-links__description {
+  max-width: 1000px;
+  margin: 12px auto 0;
+  font-size: clamp(14px, 2vw, 18px); /* fixed scaling */
+  color: #000;
+  text-align: center;
+  line-height: 1.6;
+  word-break: normal;
+  white-space: normal;
+}
+
+/* Fix for long sentence */
+.no-break {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  white-space: normal;  /* allow wrap on small screens */
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .category-links {
+    padding: 32px 12px;
+  }
+  .category-link {
+    font-size: clamp(16px, 5vw, 32px); /* smaller on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .category-links-wrapper {
+    gap: 8px;
+  }
+  .category-link {
+    font-size: clamp(14px, 6vw, 26px); /* smaller on phones */
+  }
+  .collection-links__description {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+
+
+  
+
+/* Main section titles: BY PRICE & CURRENTLY... (same size, bold) */
+.section-title{
+  margin:0 0 12px;              /* just above their content */
+  font: 700 28px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.05;
+}
+
+
+/* Equal height columns on desktop so bottoms align */
+.content-row > [class*="col-"]{
+  display:flex;
+  flex-direction:column;
+}
+.content-row .col-md-9 .art-grid{ flex:1; } /* images column fills height */
+
+/* Price buttons (as before) */
+:root { --accent-purple:#000000; }
+.price-filters{ display:flex; flex-direction:column; gap:5px; }
+.price-btn{
+  display:block; padding:5px 20px; border:2px solid #000000;
+  border-radius:28px; color:#000000; font-weight:800; text-align:center; text-decoration:none;
+  transition:transform .15s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.price-btn:hover{
+  background:linear-gradient(145deg, rgba(214,51,255,.08), rgba(255,255,255,.25));
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+  transform:translateY(-2px);
+}
+
+.price-btn {
+  display:block;
+  padding:11px 22px;
+  border:2px solid #000;     /* keep outline */
+  border-radius:28px;
+  color:#000;                /* default text black */
+  font-weight:800;
+  text-align:center;
+  text-decoration:none;
+  transition:all .25s ease;  /* smoother hover */
+}
+
+.price-btn:hover {
+  background:#000;
+  color:#fff;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+  transform:translateY(-2px);
+}
+
+
+
+
+/* Image grid: 3→2→1, equal-size cards + overlay titles */
+.art-grid{
+  display:grid; 
+  grid-template-columns:repeat(3, minmax(220px,1fr));
+  gap:32px; 
+  align-content:start; 
+  height:100%;
+}
+
+.art-card{ 
+  position:relative; 
+  display:block; 
+  overflow:hidden; 
+  border-radius:22px; 
+  text-decoration:none; 
+  aspect-ratio:4/5; 
+  background:#eee; 
+}
+
+.art-img{ 
+  width:100%; 
+  height:100%; 
+  object-fit:cover; 
+  display:block; 
+  transition:transform .35s ease; 
+}
+
+.art-card::after{ 
+  content:""; 
+  position:absolute; 
+  left:0; right:0; bottom:0; 
+  height:48%; 
+  background:linear-gradient(to top, rgba(0,0,0,.48), rgba(0,0,0,0)); 
+  pointer-events:none; 
+}
+
+.art-title{
+  position:absolute; 
+  left:12px; 
+  bottom:12px; 
+  z-index:2;
+  font-weight:500; 
+  font-size:clamp(18px,2vw,25px); 
+  color:#fff;
+
+  /* Remove any box effect */
+  background:none !important; 
+  padding:0 !important; 
+  border-radius:0 !important; 
+}
+
+.art-card:hover .art-img{ 
+  transform:scale(1.02); 
+}
+
+.art-title {
+  background: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* Breakpoints */
+@media (max-width:990px){
+  .art-grid{ grid-template-columns:repeat(2, minmax(220px,1fr)); gap:26px; }
+}
+@media (max-width:990px){
+  #container_home .home-card{ padding:28px 36px; width:calc(100% - 32px); }
+  .section-title{ font-size:clamp(24px,4.5vw,38px); }
+}
+@media (max-width:990px){
+  /* Stack columns: BY PRICE + buttons first, then CURRENTLY + images (desired order) */
+  .content-row > [class*="col-"]{ display:block; }
+  .price-filters{ max-width:420px; }
+  .art-grid{ grid-template-columns:1fr 1fr; gap:18px; height:auto; }
+}
+@media (max-width:575.98px){
+  #container_home .home-card{ padding:22px; width:calc(100% - 22px); border-radius:22px; }
+  .section-title{ font-size:clamp(20px,6.5vw,30px); margin-bottom:10px; }
+  .art-grid{ grid-template-columns:1fr; gap:16px; }
+  .art-title{ font-size:clamp(16px,4.5vw,22px); left:14px; bottom:14px; }
+}
+
+/* Wrap row properly aligned */
+.content-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;   /* ensures equal height columns */
+}
+
+/* Left side (price filters) */
+.content-row .col-md-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Right side (image grid) */
+.content-row .col-md-9 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make image grid fill available height */
+.art-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px,1fr));
+  gap: 32px;
+  align-content: start;
+}
+
+/* Keep titles same alignment */
+.section-title {
+  margin-bottom: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 990px) {
+  .content-row {
+    display: block;
+  }
+  .content-row .col-md-3,
+  .content-row .col-md-9 {
+    display: block;
+    width: 100%;
+  }
+  .price-filters {
+    margin-bottom: 24px; /* spacing before images */
+    max-width: 100%;
+  }
+  .art-grid {
+    grid-template-columns: repeat(2, minmax(150px,1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .art-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Default buttons */
+.price-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;  /* same gap for all except discounted */
+  flex: 1;   /* take available height */
+}
+
+/* Last button (Discounted price) */
+.price-filters .price-btn:last-child {
+  margin-top: auto;   /* pushes it to bottom */
+  background: #000;   /* different color */
+  color: #fff;
+  border-color: #000;
+}
+
+/* Hover state for last button */
+.price-filters .price-btn:last-child:hover {
+  background: #444;  /* softer hover */
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(0,0,0,.2);
+}
+/* Default (desktop & tablet) */
+.price-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;   /* so last-child can push down */
+}
+
+/* Last button - different look + stick to bottom */
+.price-filters .price-btn:last-child {
+  margin-top: auto;   /* push it down */
+  background: #e62e04;  /* distinct style */
+  color: #fff;
+  border-color:  #e62e04;
+}
+
+.price-filters .price-btn:last-child:hover {
+  background:  #000;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(0,0,0,.2);
+}
+
+/* ---------- Price Filters: Consolidated Responsive CSS ---------- */
+
+/* Base / default */
+.price-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Base button style (pill) */
+.price-filters .price-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 2px solid #000;
+  text-align: center;
+  white-space: normal;    /* allow wrap */
+  width: 100%;
+  max-width: 260px;       /* prevents very tall/narrow pills */
+  box-sizing: border-box;
+  font-size: 14.4px;      /* your requested default */
+  line-height: 1.1;
+}
+
+.price-filters .price-btn:hover { cursor: pointer; }
+
+/* Discounted button (default look — overridden per breakpoint if needed) */
+.price-filters .price-btn:last-child {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  align-self: flex-start;
+  margin-top: 16px;
+}
+
+/* ---------------- Desktop (>= 1025px) ---------------- */
+@media (min-width: 1025px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1; /* let column stretch */
+    align-items: stretch;
+  }
+
+  .price-filters .price-btn {
+    width: 100%;
+    max-width: none;      /* allow full column width on desktop */
+    padding: 12px 24px;
+    font-size: 14.4px;
+  }
+
+  /* Discounted button sticks to bottom on large screens */
+  .price-filters .price-btn:last-child {
+    margin-top: auto;     /* push to bottom of column */
+    background: #e62e04;
+    color: #fff;
+    border-color: #e62e04;
+  }
+
+  .price-filters .price-btn:last-child:hover {
+    background: #000;
+    box-shadow: 0 6px 14px rgba(0,0,0,.18);
+    border-color: #000;
+  }
+}
+
+/* ---------------- Tablet (768px – 1024px) — TUNED ----------------
+   Keep normal stacking (no big push-to-bottom). Make pills shorter
+   and centered in the narrow left column to avoid tall, narrow pills.
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;      /* center pills inside the column */
+    max-width: 260px;         /* limit width so pills look consistent */
+    margin-left: 0;
+  }
+
+  .price-filters .price-btn {
+    width: 100%;
+    max-width: 220px;         /* shorter pills to avoid tall stacks */
+    padding: 9px 18px;
+    font-size: 13px;         /* slightly reduce to avoid awkward wrapping */
+    box-sizing: border-box;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 16px;        /* normal gap, do not push to bottom */
+    align-self: center;
+    background: #e62e04;;
+    color: #fff;
+    border-color:#e62e04;;
+  }
+}
+
+/* ---------------- Mobile (<= 767px) ---------------- */
+@media (max-width: 767px) {
+  .price-filters {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .price-filters .price-btn {
+    width: 100%;
+    max-width: none;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 14px;
+    align-self: stretch;
+    background:#e62e04;;
+    color: #fff;
+    border-color: #e62e04;;
+  }
+}
+
+
+
+/* ---------- Responsive ---------- */ 
+
+/* Tablet (<= 990px) → stack but keep last at bottom */
+@media (max-width: 990px) {
+  .price-filters {
+    max-width: 420px;
+    flex: unset;   /* remove flex stretching */
+  }
+  .price-filters .price-btn:last-child {
+    margin-top: 16px;  /* just give normal spacing */
+    align-self: flex-start;
+  }
+}
+
+/* Mobile (<= 575px) → 1 column full width */
+@media (max-width: 575.98px) {
+  .price-filters {
+    width: 100%;
+  }
+  .price-filters .price-btn {
+    width: 100%;  /* buttons full width */
+  }
+  .price-filters .price-btn:last-child {
+    margin-top: 16px; /* just normal gap */
+  }
+}
+/* ---------------- Desktop (>= 1025px) ---------------- */
+@media (min-width: 1025px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1; /* stretch column */
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: auto;   /* push to bottom */
+    background:#e62e04;
+    color: #fff;
+    border-color:#e62e04;;
+  }
+
+  .price-filters .price-btn:last-child:hover {
+    background: #000;
+    color: #fff;
+    
+    box-shadow: 0 6px 14px rgba(0,0,0,.2);
+    border-color:#000
+  }
+}
+
+/* ---------------- Tablet (768px – 1024px) ---------------- */
+@media (min-width: 425px) and (max-width: 1024px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 16px; /* just normal gap, no big push */
+    background: #e62e04;;
+    color: #fff;
+    border-color: #e62e04;;
+    align-self: flex-start;
+  }
+}
+
+/* ---------------- Mobile (<= 767px) ---------------- */
+@media (max-width: 767px) {
+  .price-filters {
+    width: 100%;
+  }
+  .price-filters .price-btn {
+    width: 100%; /* all full width */
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 14px; /* normal spacing */
+    background: #e62e04;;
+    color: #fff;
+    border-color: #e62e04;;
+  }
+}
+
+
+/* Desktop (>=1025px) → Discounted button sticks at bottom */
+@media (min-width: 1025px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: auto; /* push to bottom */
+  }
+}
+
+/* Tablet (768px – 1024px) → normal stacking, small extra gap */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 16px; /* small gap instead of big push */
+    align-self: flex-start;
+  }
+}
+
+/* Mobile (<=767px) → full-width buttons, stacked */
+@media (max-width: 767px) {
+  .price-filters {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .price-filters .price-btn {
+    width: 100%;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 14px; /* slight extra gap */
+  }
+}
+
+/* Screens >= 768px → Discounted button sticks at bottom */
+@media (min-width: 768px) {
+  .price-filters {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* make column stretch */
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: auto; /* push to bottom */
+  }
+}
+
+/* Mobile (<=1024px) → stack normally */
+@media (max-width: 767px) {
+  .price-filters {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .price-filters .price-btn {
+    width: 100%;
+  }
+
+  .price-filters .price-btn:last-child {
+    margin-top: 14px; /* just a little extra gap */
+  }
+}
+
+
+
+/* =========================
+   ART NAV — CLEAN & FINAL
+   ========================= */
+
+/* ===== Base ===== */
+.art-nav{
+  background:#fff;
+  border-top:4px solid #000;
+  font:700 17px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  position:relative;
+  z-index:10;
+  overflow:visible; /* allow flyouts to overflow */
+}
+.art-nav__container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 16px;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  z-index:20;
+}
+.art-nav__left,
+.art-nav__right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.art-nav__item{ position:relative; }
+.art-link{
+  color:#000;
+  text-decoration:none;
+  background:none;
+  border:0;
+  cursor:pointer;
+  padding:0;
+  font-weight:700;
+  font-size:17px;
+}
+.art-link:hover{ color:#e07a2f; }
+
+/* ===== L1 dropdown (default hidden) ===== */
+.art-dd{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;
+  display:none;
+  min-width:260px;
+  background:#fff;
+  color:#000;
+  border-radius:8px;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  padding:10px 0;
+  z-index:9999;
+}
+.art-dd__list{ list-style:none; margin:0; padding:0; }
+.art-dd__link{
+  display:block;
+  padding:8px 14px;
+  color:#000;
+  text-decoration:none;
+  font-weight:500;
+}
+.art-dd__link:hover{ background:rgba(0,0,0,.06); }
+
+/* ===== L2 flyout (RIGHT only, default hidden) ===== */
+.art-has-fly{ position:relative; }
+.art-fly{
+  position:absolute !important;
+  top:0;
+  left:100% !important;
+  margin-left:12px;
+  display:none !important;
+  min-width:520px;
+  background:#fff;
+  padding:16px;
+  border-radius:8px;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  z-index:10000;
+}
+.art-fly__cols{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.art-fly__title{
+  font-size:14px;
+  text-transform:uppercase;
+  font-weight:800;
+  margin:0 0 8px;
+  color:#6c6759;
+}
+.art-fly__ul{ list-style:none; margin:0; padding:0; }
+.art-fly__ul li a{
+  display:block;
+  padding:6px 0;
+  color:#000;
+  text-decoration:none;
+}
+.art-fly__ul li a:hover{ background:rgba(0,0,0,.06); }
+
+/* ===== Burger ===== */
+.art-nav__burger{
+  display:inline-flex;
+  flex-direction:column;
+  gap:5px;
+  width:36px;
+  height:36px;
+  justify-content:center;
+  align-items:center;
+  background:transparent;
+  border:0;
+  margin-right:8px;
+  z-index:1002;
+}
+.art-nav__burger span{
+  width:22px; height:2px; background:#000; display:block;
+}
+
+/* ===== Menu panel base ===== */
+.art-nav__menu{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  width:100%;
+}
+
+/* ---------- Slider space that pushes the hero (desktop) ---------- */
+.nav-push{
+  height:0;
+  transition:height .28s ease;
+  background:#fff;
+  will-change:height;
+}
+.is-nav-open .nav-push{
+  height:360px;                     /* adjust as needed */
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* Stage that receives dropdown on desktop hover */
+.art-nav__stage{
+  position:relative;
+  z-index:9;       /* stays under the top bar (z:20) */
+  background:#fff;
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* ================= Desktop (≥992px) ================ */
+@media (min-width:992px){
+  .art-nav__burger{ display:none !important; }
+  .art-nav__container{ height:60px; }
+  .art-nav__menu{
+    position:static !important;
+    transform:none !important;
+    box-shadow:none !important;
+    padding:22px !important;
+    display:flex !important;
+  }
+  .art-nav__left{ margin-right:auto; gap:24px; }
+  .art-nav__right{ margin-left:auto; }
+
+  /* show L1 on hover/focus */
+  .art-has-dd:hover > .art-dd,
+  .art-has-dd:focus-within > .art-dd{ display:block; }
+
+  /* show RIGHT flyout only on hover/focus of that row */
+  .art-has-fly:hover > .art-fly,
+  .art-has-fly:focus-within > .art-fly{ display:block !important; }
+}
+
+/* ================= Mobile/Tablet (≤991.98px) ================ */
+@media (max-width:991.98px){
+  .art-nav__container{ height:56px; z-index:30; }
+
+  /* slide-down menu */
+  .art-nav__menu{
+    position:fixed;
+    top:56px; left:0; right:0;
+    background:#fff;
+    color:#111;
+    max-height:calc(100dvh - 56px);
+    overflow:auto;
+    transform:translateY(-120%);
+    transition:transform .25s ease;
+    box-shadow:0 18px 40px rgba(0,0,0,.16);
+    z-index:1001;
+    padding:12px 16px 20px;
+    display:block;
+  }
+  .art-nav__menu.open{ transform:translateY(0); }
+
+  .art-nav__left,
+  .art-nav__right{
+    flex-direction:column;
+    align-items:stretch;
+    gap:6px;
+  }
+  .art-link{ color:#111; padding:12px 6px; }
+  .art-link:hover{ color:#e07a2f; }
+
+  /* L1 acts as accordion */
+  .art-dd{
+    position:static !important;
+    display:none !important;
+    background:transparent;
+    box-shadow:none;
+    padding:0;
+  }
+  .art-has-dd.open > .art-dd{
+    display:grid !important;
+    grid-template-columns:minmax(170px,42%) 1fr; /* left list | right panel */
+    gap:14px;
+    background:#fff;
+    border-radius:12px;
+    padding:12px;
+  }
+  .art-dd__list{ display:block !important; }
+
+  /* RIGHT panel shows when Browse Art row is .open */
+  .art-has-fly > .art-fly{
+    grid-column:2;
+    position:relative !important;
+    display:none !important;
+    margin:0;
+    padding:0;
+    box-shadow:none !important;
+    border-radius:12px;
+    min-width:0;
+  }
+  .art-has-fly.open > .art-fly{ display:block !important; }
+  .art-has-fly.open > .art-fly .art-fly__cols{
+    display:grid !important;
+    grid-template-columns:minmax(120px,1fr) minmax(120px,1fr) !important;
+    gap:12px;
+  }
+
+  /* Tiny phones => stack */
+  @media (max-width:420px){
+    .art-has-dd.open > .art-dd{ grid-template-columns:1fr; }
+    .art-has-fly > .art-fly{ grid-column:1; margin-top:8px; }
+    .art-has-fly.open > .art-fly .art-fly__cols{ grid-template-columns:1fr !important; }
+  }
+} /* <-- closes the ≤991.98px block */
+
+/* ===== Kill legacy/old menus outside .art-nav ===== */
+.hover-category-menu,
+#click-category-menu,
+.mega-menu,
+.mega-dropdown,
+.category-menu,
+.aiz-category-menu{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+}
+
+/* Safety: never show right panel by default */
+.art-dd .art-has-fly > .art-fly{ display:none !important; }
+
+/* Ensure overflow allowed for dropdowns */
+.art-nav{ overflow:visible; }
+.art-nav__container{ overflow:visible; }
+
+/* When dropdown is mounted into #artNavStage */
+.art-dd.in-stage{
+  display:block !important;
+  position:relative;              /* lives inside the stage container */
+  top:0; left:0;
+  width:100%;
+  margin:0;
+  border-radius:0 0 12px 12px;
+}
+
+.art-fly.in-stage{
+  display:block !important;       /* ensure the right fly panel can show */
+  position:static !important;     /* inside staged area it becomes normal flow */
+  box-shadow:none;                /* optional: flatter inside stage */
+}
+
+/* Stage container look */
+.art-nav__stage{
+  position:relative;
+  z-index:9;                      /* bar = 20, stage below it */
+  background:#fff;
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* Spacer that pushes hero down when nav open */
+.nav-push{
+  height:0;
+  transition:height .28s ease;
+  background:#fff;
+}
+.is-nav-open .nav-push{ height:360px; } /* tweak as you like */
+.art-dd.in-stage{ display:block !important; position:relative; top:0; left:0; width:100%; margin:0; border-radius:0 0 12px 12px; }
+.art-fly.in-stage{ display:block !important; position:static !important; box-shadow:none; }
+.art-nav__stage{ position:relative; z-index:9; background:#fff; box-shadow:0 18px 40px rgba(0,0,0,.12); }
+.nav-push{ height:0; transition:height .28s ease; background:#fff; }
+/* ======== DESKTOP: Staged mega-menu look & layout ======== */
+
+/* Stage wrapper: center content same as header container */
+.art-nav__stage{
+  background:#fff;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  padding:0 16px;                 /* align with header side padding */
+}
+
+/* Main staged dropdown panel */
+.art-dd.in-stage{
+  display:grid !important;
+  position:relative;
+  top:0; left:0;
+  width:100%;
+  max-width:1200px;               /* match your header max-width */
+  margin:0 auto;
+  grid-template-columns: 260px 1fr; /* left list | right content */
+  gap:24px;
+  padding:16px 20px;
+  border-radius:0 0 12px 12px;
+  background:#fff;
+  box-shadow:0 12px 36px rgba(0,0,0,.12);
+  border-top:1px solid rgba(0,0,0,.08);
+}
+
+/* Left list inside staged menu */
+.art-dd.in-stage > .art-dd__list{
+  padding:0;
+  margin:0;
+}
+.art-dd.in-stage .art-dd__link{
+  padding:10px 12px;
+  border-radius:8px;
+  font-weight:600;
+}
+.art-dd.in-stage .art-dd__link:hover{
+  background:#f5f5f5;
+}
+
+/* Right panel becomes clean content area */
+.art-fly.in-stage{
+  display:block !important;
+  position:relative !important;
+  margin:0;
+  padding:0;
+  min-width:0;
+  box-shadow:none;
+  border-left:1px solid #eee;
+  border-radius:0;
+}
+
+/* Two columns (Subjects | Style) */
+.art-fly.in-stage .art-fly__cols{
+  display:grid !important;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  padding:4px 8px 4px 20px; /* little inset because of left border */
+}
+
+.art-fly__title{
+  font-size:13px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-weight:800;
+  color:#6c6759;
+  margin:4px 0 10px;
+}
+
+.art-fly__ul li a{
+  padding:6px 0;
+  border-radius:6px;
+}
+.art-fly__ul li a:hover{
+  background:#f5f5f5;
+}
+
+/* Keep dropdown edges visible and not too tall */
+.art-dd.in-stage{
+  max-height:340px;               /* tweak if needed */
+  overflow:auto;                  /* scroll if content exceeds */
+  scrollbar-width:thin;
+}
+
+/* Make sure the hamburger/mobile rules don’t affect desktop staged view */
+@media (min-width:992px){
+  .art-dd{ display:none; }        /* default hidden when not staged */
+}
+
+/* Optional: soften bottom edge with subtle gradient */
+.art-nav__stage::after{
+  content:"";
+  display:block;
+  height:10px;
+  margin-top:-10px;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.06), transparent);
+  border-radius:0 0 12px 12px;
+}
+/* Stage: no extra paddings so there’s no big white gap */
+.art-nav__stage{
+  position:relative;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  padding:0;                      /* IMPORTANT: remove extra space */
+}
+
+/* The staged dropdown sits absolutely under the bar and aligns to Buy Art */
+.art-dd.in-stage{
+  display:block !important;
+  position:absolute;              /* anchor inside stage */
+  top:0;
+  left:0;                         /* JS sets exact left to Buy Art */
+  min-width:260px;
+  width:auto;                     /* not full width */
+  margin:0;
+  border-radius:0 0 12px 12px;
+  background:#fff;
+  box-shadow:0 12px 36px rgba(0,0,0,.12);
+  border-top:1px solid rgba(0,0,0,.08);
+}
+
+/* Right fly panel visible when its row is hovered (unchanged) */
+.art-fly.in-stage{
+  display:block !important;
+  position:absolute !important;   /* keep as overlay panel */
+  top:0;
+  left:100% !important;
+  margin-left:12px;
+  box-shadow:0 12px 36px rgba(0,0,0,.12);
+  border-radius:8px;
+  background:#fff;
+}
+
+/* Reduce global "hero push" gap; JS sets exact height anyway */
+.nav-push{ height:0; transition:height .25s ease; }
+
+/* Make sure container doesn’t clip */
+.art-nav, .art-nav__container, .art-nav__stage{ overflow:visible; }
+
+/* Desktop default (non-staged) stays hidden */
+@media (min-width:992px){
+  .art-dd{ display:none; }
+}
+
+/* --- base nav --- */
+.art-nav { position: relative; z-index: 100; }
+.art-nav__container { display:flex; align-items:center; justify-content:space-between; }
+
+/* --- only the Buy Art <li> controls the mega --- */
+.art-has-dd { position: relative; }              /* the <li> */
+.art-has-dd > .art-dd {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;                                 /* hidden by default */
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+  padding: 20px 24px;
+  min-width: 720px;                              /* adjust as you like */
+  z-index: 1000;
+}
+.art-has-dd:hover > .art-dd,
+.art-has-dd:focus-within > .art-dd { display:block; }
+
+/* level-1 list layout */
+.art-dd__list { display:grid; grid-auto-flow:column; gap:48px; list-style:none; margin:0; padding:0; }
+.art-dd__link { display:block; padding:8px 0; white-space:nowrap; }
+
+/* --- “Browse Art” flyout to the right, parallel --- */
+.art-has-fly { position: relative; }
+.art-has-fly > .art-fly {
+  position: absolute;
+  top: 0;                                        /* parallel alignment */
+  left: 100%;                                    /* right side */
+  display: none;
+  background:#fff;
+  border-left: 1px solid #eee;
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+  padding: 16px 20px;
+  min-width: 420px;                              /* two-column area */
+  z-index: 1001;                                 /* above the mega */
+}
+.art-has-fly:hover > .art-fly,
+.art-has-fly:focus-within > .art-fly { display:block; }
+
+/* flyout columns */
+.art-fly__cols { display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
+.art-fly__title { margin:0 0 8px; font-weight:600; }
+.art-fly__ul { list-style:none; margin:0; padding:0; }
+.art-fly__ul li a { display:block; padding:6px 0; }
+
+/* avoid “hover gap” issues */
+.art-dd, .art-fly { pointer-events:auto; }
+.art-dd * { margin:0; }
+
+
+
+
+/* ==== Art for Sale Cleanup ==== */
+
+/* Remove grey lines (all borders) */
+#section_featured .carousel-box {
+  border: none !important;
+}
+
+/* Keep layout clean like second screenshot */
+#section_featured .aiz-card-box {
+  border: none !important;
+  box-shadow: none !important;
+  background: #fff;
+}
+
+/* Product image area */
+#section_featured .aiz-card-box .img-fit {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Align name and price cleanly */
+#section_featured h3,
+#section_featured .fs-14 {
+  text-align: center;
+}
+
+
+ /* Currency Switcher Title */
+#country-change > a.dropdown-toggle {
+    color: #bfbfbf !important;
+}
+
+/* Language Switcher Title */
+#lang-change > a.dropdown-toggle {
+    color: #bfbfbf !important;
+}
+
+/* Currency Switcher Title */
+#country-change > a.dropdown-toggle {
+    color: #74747c !important;
+    transition: color 0.3s ease; /* smooth effect */
+}
+
+#country-change > a.dropdown-toggle:hover {
+    color: #000000 !important;
+}
+
+/* Language Switcher Title */
+#lang-change > a.dropdown-toggle {
+    color: #74747c !important;
+    transition: color 0.3s ease;
+}
+
+#lang-change > a.dropdown-toggle:hover {
+    color: #000000 !important;
+}
+
+
+#country-change > a,
+#lang-change > a span {
+    font-size: 12px !important;
+    font-weight: 400;       /* same thickness */
+    line-height: 1.2;       /* consistent vertical height */
+}
+
+
+
+.footer-logo,
+.footer-description {
+    text-align: left; 
+}
+
+.hov-animate-outline::before,
+.hov-animate-outline::after {
+    border: none !important;
+    background: none !important;
+}
+/* Remove pseudo-element black box hover effect */
+.hov-animate-outline::before,
+.hov-animate-outline::after {
+    content: none !important;
+    display: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+/* Disable wishlist & compare hover effects */
+.aiz-p-hov-icon:hover,
+.aiz-p-hov-icon:focus {
+    background: none !important;
+    color: inherit !important;
+    box-shadow: none !important;
+}
+
+/* Disable Add to Cart hover effect */
+.cart-btn:hover,
+.cart-btn:focus {
+    background: none !important;
+    color: inherit !important;
+    box-shadow: none !important;
+}
+.aiz-p-hov-icon svg path {
+    fill: #919199 !important; /* default gray */
+}
+
+.aiz-p-hov-icon:hover svg path {
+    fill: #919199 !important; /* stay same on hover */
+}
+
+
+.art-link,
+.art-link:hover,
+.art-link:focus,
+.art-link:active {
+  color: #000 !important;
+  text-decoration: none !important;
+  background: none !important;
+}
+
+/* icon points up when expanded */
+.filter-section[aria-expanded="true"] i {
+    transform: rotate(0deg); 
+    transition: transform 0.2s ease;
+}
+
+/* icon points down when collapsed */
+.filter-section[aria-expanded="false"] i {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
+/* Base style for filter boxes (except selections & techniques) */
+.bg-white.border.mb-3 {
+    background-color: #f8f9fa !important;
+    padding: 0.5rem !important;
+    transition: all 0.3s ease;
+}
+
+/* Exclude selections & techniques */
+.bg-white.border.mb-3.selections-box,
+.bg-white.border.mb-3.techniques-box {
+    background-color: #fff !important;
+    padding: 1rem !important; /* keep original */
+}
+
+/* Hover effect only on the header (p-3 area, not collapse content) */
+.bg-white.border.mb-3 > .fs-16.fw-700.p-3:hover,
+.bg-white.border.mb-3 > .fs-16.fw-700.py-2:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+/* Ensure links/text inside header turn white on hover */
+.bg-white.border.mb-3 > .fs-16.fw-700.p-3:hover a,
+.bg-white.border.mb-3 > .fs-16.fw-700.py-2:hover a {
+    color: #fff !important;
+}
+/* Reduce padding for all filter box headings */
+.bg-white.border.mb-3 > .fs-16.fw-700.p-3 {
+    padding: 0.1rem !important;  /* same as p-2 */
+}
+
+
+.page-intro-heading {
+    font: 700 28px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: #000;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.page-intro-text {
+    font: 400 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: #555;
+    text-align: left;
+    margin: 0;
+}
+/* Add space after menu before heading section */
+.page-intro-heading {
+    margin-top: 0rem;  /* ≈24px */
+}
+
+
+/* Masonry Grid Layout */
+.product-grid {
+    column-count: 4;       /* 4 columns on large screens */
+    column-gap: 1.5rem;    /* gap between items */
+}
+
+.product-grid .product-card {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .product-grid { column-count: 3; }
+}
+@media (max-width: 768px) {
+    .product-grid { column-count: 2; }
+}
+@media (max-width: 576px) {
+    .product-grid { column-count: 1; }
+}
+
+
+
+
+
+.home-artists { padding: 40px 0; background:#fff; }
+.home-artists .section-title { margin-bottom: 24px; font-size:28px; font-weight:700; }
+
+.artists-grid{
+  display:grid;
+  gap:24px;
+  grid-template-columns: repeat(2, 1fr);
+  align-items:start;
+}
+@media (min-width:576px){ .artists-grid{ grid-template-columns:repeat(3,1fr);} }
+@media (min-width:768px){ .artists-grid{ grid-template-columns:repeat(4,1fr);} }
+@media (min-width:992px){ .artists-grid{ grid-template-columns:repeat(6,1fr);} }
+@media (min-width:1200px){ .artists-grid{ grid-template-columns:repeat(7,1fr);} }
+@media (min-width:1400px){ .artists-grid{ grid-template-columns:repeat(8,1fr);} }
+
+.artist-card{
+  text-align:center;
+  display:flex; flex-direction:column; align-items:center;
+  gap:8px; color:#000;
+  text-decoration:none;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.artist-card:hover{ transform:translateY(-4px); }
+
+.artist-avatar{
+  width:120px; height:120px;
+  border-radius:50%;
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  background:#ffffff;
+  transition: transform .18s ease;
+}
+.artist-avatar img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:grayscale(100%);
+  transform-origin:center;
+}
+.artist-card:hover .artist-avatar img { filter: none; transform:scale(1.03); }
+
+.artist-name{
+  font-weight:800; font-size:.82rem; letter-spacing:.5px; text-transform:uppercase;
+}
+.artist-count{
+  font-size:.8rem; color:#7a7a7a; font-style:italic;
+}
+
+.artist-avatar.viewall{
+  background:#111; color:#fff;
+  font-weight:800; font-size:.9rem;
+  display:flex; align-items:center; justify-content:center;
+}
+@media (max-width:360px){
+  .artist-avatar{ width:100px; height:100px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* icon rotate handling for filter headers */
+.filter-section[aria-expanded="true"] i {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+.filter-section[aria-expanded="false"] i {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
+
+/* subtle neutral background for filter boxes */
+.bg-white.border.mb-3 {
+    background-color: #f8f9fa !important;
+    transition: all 0.3s ease;
+    /* keep outer box padding 0 so inner header controls spacing */
+    padding: 0 !important;
+}
+
+/* Ensure header block looks clickable and fills area */
+.bg-white.border.mb-3 > .fw-700,
+.bg-white.border.mb-3 > .fs-16.fw-700 {
+    cursor: pointer;
+    display: flex;               /* keeps title + chevron aligned */
+    align-items: center;
+    justify-content: space-between;
+    /* give a small consistent header padding (overrides bootstrap p-2/p-3) */
+    padding: 0.4rem !important;
+}
+
+/* Hover on header (covers both new and old class names) */
+.bg-white.border.mb-3 > .fw-700.p-2:hover,
+.bg-white.border.mb-3 > .fw-700.py-2:hover,
+ {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+/* Make sure links/icons inside header also turn white on hover */
+.bg-white.border.mb-3 > .fw-700.p-2:hover a,
+.bg-white.border.mb-3 > .fw-700.py-2:hover a,
+ {
+    color: #fff !important;
+}
+
+/* If you want the chevron/icon to change color separately, use this */
+.bg-white.border.mb-3 > .fw-700.p-2:hover .collapse-icon,
+.bg-white.border.mb-3 > .fw-700.py-2:hover .collapse-icon,
+{
+    color: #fff !important;
+}
+
+/* Optional: if header text uses inline font-size, preserve inherit color behavior */
+.bg-white.border.mb-3 > .fw-700 a,
+.bg-white.border.mb-3 > .fs-16.fw-700 a {
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* page intro */
+.page-intro-heading {
+    font: 700 28px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #000;
+    text-align: left;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+}
+.page-intro-text {
+    font: 400 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #555;
+    text-align: left;
+    margin: 0;
+}
+
+/* Masonry Grid */
+.product-grid {
+    column-count: 4;
+    column-gap: 1.5rem;
+}
+.product-grid .product-card {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+.product-grid .product-card .card img {
+    border-radius: 8px;
+    object-fit: cover;
+}
+@media (max-width: 1200px) { .product-grid { column-count: 3; } }
+@media (max-width: 768px)  { .product-grid { column-count: 2; } }
+@media (max-width: 576px)  { .product-grid { column-count: 1; } }
+
+/* small spacing for filters list items */
+.aiz-checkbox, .aiz-radio { margin-bottom: .5rem; }
+
+
+                           
+/* Currency Switcher Title */
+#currency-change > a.dropdown-toggle,
+#lang-change > a.dropdown-toggle {
+    color: #74747c !important;
+    font-size: 12px !important;
+    font-weight: 400;
+    line-height: 1.2;
+    transition: color 0.3s ease; /* smooth hover effect */
+}
+
+#currency-change > a.dropdown-toggle:hover,
+#lang-change > a.dropdown-toggle:hover {
+    color: #000000 !important;
+}
+
+/* Scrollable dropdown for currency + language */
+#currency-change .dropdown-menu,
+#lang-change .dropdown-menu {
+    max-height: 200px;   /* adjust height */
+    overflow-y: auto;
+    overflow-x: hidden;  /* prevent horizontal scrollbar */
+}
+
