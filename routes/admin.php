@@ -238,6 +238,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
         Route::post('/bulk-customer-delete', 'bulk_customer_delete')->name('bulk-customer-delete');
     });
 
+    // Art Community (Artists / Collectors / Galleries)
+    Route::name('admin.')->group(function () {
+        $artCommunity = [
+            'artists'    => \App\Http\Controllers\Admin\ArtistController::class,
+            'collectors' => \App\Http\Controllers\Admin\CollectorController::class,
+            'galleries'  => \App\Http\Controllers\Admin\GalleryController::class,
+        ];
+        foreach ($artCommunity as $slug => $controller) {
+            Route::controller($controller)->prefix($slug)->name($slug . '.')->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{id}', 'show')->whereNumber('id')->name('show');
+                Route::post('/{id}/approve', 'approve')->name('approve');
+                Route::post('/{id}/reject', 'reject')->name('reject');
+                Route::get('/{id}/ban', 'ban')->name('ban');
+                Route::get('/{id}/delete', 'destroy')->name('destroy');
+                Route::get('/{id}/login-as', 'login_as')->name('login_as');
+            });
+        }
+    });
+
     // Newsletter
     Route::controller(NewsletterController::class)->group(function () {
         Route::get('/newsletter', 'index')->name('newsletters.index');
@@ -282,6 +302,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
         Route::get('/activation', 'activation')->name('activation.index');
         Route::get('/payment-method', 'payment_method')->name('payment_method.index');
         Route::get('/file_system', 'file_system')->name('file_system.index');
+        Route::get('/image-cdn', 'image_cdn')->name('image_cdn.index');
         Route::get('/social-login', 'social_login')->name('social_login.index');
         Route::get('/smtp-settings', 'smtp_settings')->name('smtp_settings.index');
         Route::get('/google-analytics', 'google_analytics')->name('google_analytics.index');

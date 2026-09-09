@@ -16,17 +16,17 @@
     <!-- 3 Image Buttons -->
     <div class="welcome-cards">
 
-        <a href="https://dev.artistiqe.com/shops/create" class="welcome-card">
+        <a href="{{ url('shops/create') }}" class="welcome-card">
             <h3>Artists</h3>
             <img src="{{ static_asset('assets/img/Group.svg') }}" alt="Artists">
         </a>
 
-        <a href="https://dev.artistiqe.com/collector/register" class="welcome-card">
+        <a href="{{ route('collector.register') }}" class="welcome-card">
             <h3>Collectors</h3>
             <img src="{{ static_asset('assets/img/Groupc.svg') }}" alt="Collectors">
         </a>
 
-        <a href="https://dev.artistiqe.com/" class="welcome-card">
+        <a href="{{ route('gallery.register') }}" class="welcome-card">
             <h3>Gallery/Institution</h3>
             <img src="{{ static_asset('assets/img/Groupg.svg') }}" alt="Gallery">
         </a>

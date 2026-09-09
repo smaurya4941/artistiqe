@@ -248,6 +248,8 @@ class HomeController extends Controller
     {
         if (Auth::user()->user_type == 'seller') {
             return redirect()->route('seller.dashboard');
+        } elseif (Auth::user()->isArtCommunity()) {
+            return redirect()->route(Auth::user()->user_type . '.dashboard');
         } elseif (Auth::user()->user_type == 'customer') {
             $users_cart = Cart::where('user_id', auth()->user()->id)->first();
             if ($users_cart) {
@@ -265,6 +267,8 @@ class HomeController extends Controller
     {
         if (Auth::user()->user_type == 'seller') {
             return redirect()->route('seller.profile.index');
+        } elseif (Auth::user()->isArtCommunity()) {
+            return redirect()->route(Auth::user()->user_type . '.profile');
         } elseif (Auth::user()->user_type == 'delivery_boy') {
             return view('delivery_boys.profile');
         } else {

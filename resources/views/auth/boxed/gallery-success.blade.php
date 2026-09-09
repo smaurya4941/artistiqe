@@ -63,10 +63,11 @@ body{
          <a href="{{ route('home') }}">
     <img src="{{ static_asset('assets/img/Artistiqe_Logo_sd.png') }}" alt="Artistiqe">
 </a>
-        <h3 class="mt-4">Registration Successful</h3>
-        <p>We’re glad to have you with us.</p>
+        <h3 class="mt-4">Application Received</h3>
+        <p>Thank you for registering your gallery with ArtistiQe.</p>
         <small>
-            For further details our team will contact you shortly.
+            Your gallery account is <strong>pending review</strong>. Our team will verify your
+            details and be in touch shortly. You’ll be able to sign in once your account is approved.
         </small>
     </div>
 </div>

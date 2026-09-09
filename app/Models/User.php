@@ -27,8 +27,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'city', 'postal_code', 'phone', 'country', 'provider_id', 'email_verified_at', 'verification_code'
+        'name', 'email', 'password', 'user_type', 'address', 'city', 'postal_code', 'phone', 'country', 'provider_id', 'email_verified_at', 'verification_code'
     ];
+
+    /**
+     * The user_type values that belong to the art community.
+     */
+    public const ART_COMMUNITY_TYPES = ['artist', 'collector', 'gallery'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -167,5 +172,50 @@ class User extends Authenticatable implements MustVerifyEmail
     public function preorders()
     {
         return $this->hasMany(Preorder::class);
+    }
+
+    /* ===================== Art community ===================== */
+
+    public function artistProfile()
+    {
+        return $this->hasOne(Artist::class);
+    }
+
+    public function collectorProfile()
+    {
+        return $this->hasOne(CollectorRegister::class);
+    }
+
+    public function galleryProfile()
+    {
+        return $this->hasOne(GalleryRegister::class);
+    }
+
+    public function isArtCommunity(): bool
+    {
+        return in_array($this->user_type, self::ART_COMMUNITY_TYPES, true);
+    }
+
+    /**
+     * The profile row matching this user's art-community type (or null).
+     */
+    public function artCommunityProfile()
+    {
+        return match ($this->user_type) {
+            'artist'    => $this->artistProfile,
+            'collector' => $this->collectorProfile,
+            'gallery'   => $this->galleryProfile,
+            default     => null,
+        };
+    }
+
+    public function artCommunityApproved(): bool
+    {
+        if (! $this->isArtCommunity()) {
+            return true;
+        }
+        $profile = $this->artCommunityProfile();
+
+        return $profile !== null && $profile->status === 'approved';
     }
 }

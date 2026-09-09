@@ -123,6 +123,13 @@ class BusinessSettingsController extends Controller
         return view('backend.setup_configurations.file_system');
     }
 
+    public function image_cdn(Request $request)
+    {
+        CoreComponentRepository::instantiateShopRepository();
+        CoreComponentRepository::initializeCache();
+        return view('backend.setup_configurations.image_cdn');
+    }
+
     /**
      * Update the API key's for payment methods.
      * @param  \Illuminate\Http\Request  $request

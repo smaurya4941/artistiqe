@@ -19,9 +19,9 @@ use GuzzleHttp\Client;
 use Storage;
 use App\Rules\Recaptcha;
 use Illuminate\Validation\Rule;
-use App\Models\Artist;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -272,37 +272,31 @@ class LoginController extends Controller
     return view('auth.boxed.user_login');
 }
 
-   protected function attemptLogin(Request $request)
-{
-    $email = $request->input('email');
-    $password = $request->input('password');
+    protected function attemptLogin(Request $request)
+    {
+        if (! $this->guard()->attempt($this->credentials($request), $request->filled('remember'))) {
+            return false;
+        }
 
-    /* ========= ARTIST LOGIN ========= */
-   $artist = Artist::where('email', $email)->first();
+        // Art-community accounts (artist / collector / gallery) can only sign in
+        // once an admin has approved them.
+        $user = $this->guard()->user();
 
+        if ($user->isArtCommunity() && ! $user->artCommunityApproved()) {
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-    if ($artist && $password === $artist->password) {
+            throw ValidationException::withMessages([
+                $this->username() => [translate('Your account is awaiting admin approval.')],
+            ]);
+        }
 
-        Auth::guard('artist')->login($artist);
-
-        // 🔥 VERY IMPORTANT
         return true;
     }
 
-    /* ========= USER LOGIN ========= */
-    return $this->guard()->attempt(
-        $this->credentials($request),
-        $request->filled('remember')
-    );
-}
-
     public function authenticated()
     {
-          // ARTIST LOGIN (artist guard)
-    // ------------------------------- */
-    if (Auth::guard('artist')->check()) {
-        return redirect()->route('artist.dashboard');
-    }
         if (session('temp_user_id') != null) {
             if(auth()->user()->user_type == 'customer'){
                 Cart::where('temp_user_id', session('temp_user_id'))
@@ -324,6 +318,8 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
         } elseif (auth()->user()->user_type == 'seller') {
             return redirect()->route('seller.dashboard');
+        } elseif (auth()->user()->isArtCommunity()) {
+            return redirect()->route(auth()->user()->user_type . '.dashboard');
         } else {
 
             if (session('link') != null) {

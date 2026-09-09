@@ -424,7 +424,6 @@
     <!-- SCRIPTS -->
     <script src="{{ static_asset('assets/js/vendors.js') }}"></script>
     <script src="{{ static_asset('assets/js/aiz-core.js?v=') }}{{ rand(1000, 9999) }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ static_asset('assets/slick/slick.js') }}"></script>
     <script src="{{ static_asset('assets/slick/slicksettings.js?v=') }}{{ rand(1000, 9999) }}"></script>
 

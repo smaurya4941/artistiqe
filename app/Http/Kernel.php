@@ -7,6 +7,7 @@ use App\Http\Middleware\isPreorder;
 use App\Http\Middleware\IsSeller;
 use App\Http\Middleware\IsCustomer;
 use App\Http\Middleware\IsUser;
+use App\Http\Middleware\EnsureUserType;
 use App\Http\Middleware\CheckoutMiddleware;
 use App\Http\Middleware\IsUnbanned;
 use App\Http\Middleware\AppLanguage;
@@ -77,6 +78,7 @@ class Kernel extends HttpKernel
         'seller' => IsSeller::class,
         'customer' => IsCustomer::class,
         'user' => IsUser::class,
+        'user_type' => EnsureUserType::class,
         'unbanned' => IsUnbanned::class,
         'checkout' => CheckoutMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

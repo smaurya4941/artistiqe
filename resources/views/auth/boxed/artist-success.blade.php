@@ -82,15 +82,16 @@ body{
          <a href="{{ route('home') }}">
     <img src="{{ static_asset('assets/img/Artistiqe_Logo_sd.png') }}" alt="Artistiqe">
 </a>
-        <h3 class="mt-4">Registration Successful</h3>
-        <p>We’re glad to have you with us.</p>
+        <h3 class="mt-4">Application Received</h3>
+        <p>Thank you for applying to join ArtistiQe.</p>
         <small>
-            Our Artist Manager will connect with you within 24–48 working hours  
-            to guide your next steps and prepare you for your profile launch on ArtistiQe.
+            Your artist account is now <strong>pending review</strong>. Our Artist Manager will
+            verify your details and connect with you within 24–48 working hours. You’ll be able
+            to sign in and set up your studio once your account is approved.
         </small>
         <div class="mt-4">
-    <a href="{{ route('artist.dashboard') }}" class="dashboard-btn">
-        Go to Dashboard
+    <a href="{{ route('home') }}" class="dashboard-btn">
+        Back to Home
     </a>
 </div>
 

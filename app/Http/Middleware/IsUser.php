@@ -16,11 +16,16 @@ class IsUser
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && 
-                (Auth::user()->user_type == 'customer' || 
-                Auth::user()->user_type == 'seller' || 
-                Auth::user()->user_type == 'delivery_boy') ) {
-            
+        if (Auth::check() &&
+                in_array(Auth::user()->user_type, [
+                    'customer',
+                    'seller',
+                    'delivery_boy',
+                    'artist',
+                    'collector',
+                    'gallery',
+                ], true) ) {
+
             return $next($request);
         }
         else{

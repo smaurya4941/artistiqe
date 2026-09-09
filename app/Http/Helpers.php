@@ -1196,12 +1196,95 @@ if (!function_exists('app_timezone')) {
     }
 }
 
+/*
+|--------------------------------------------------------------------------
+| Image CDN (Cloudinary fetch mode)
+|--------------------------------------------------------------------------
+|
+| Serves raster images through Cloudinary's on-the-fly fetch endpoint so
+| they are delivered as WebP/AVIF, auto-compressed and CDN-cached, without
+| moving any files. Fully controlled from
+|   Admin > Setup & Configurations > Image CDN
+| (values live in `business_settings`, read via cached get_setting()).
+|
+*/
+if (!function_exists('image_cdn_config')) {
+    function image_cdn_config()
+    {
+        static $cfg = null;
+        if ($cfg !== null) {
+            return $cfg;
+        }
+
+        return $cfg = [
+            'enabled'      => get_setting('image_cdn_enabled') == 1,
+            'provider'     => get_setting('image_cdn_provider') ?: 'cloudinary',
+            'cloud'        => trim((string) get_setting('image_cdn_cloud_name')),
+            'transform'    => trim((string) get_setting('image_cdn_default_transform')) ?: 'f_auto,q_auto,dpr_auto',
+            'include_theme' => get_setting('image_cdn_include_theme') == 1,
+        ];
+    }
+}
+
+if (!function_exists('cdn_image')) {
+    /**
+     * Wrap an image URL with the configured CDN's fetch transformation.
+     * Returns the original URL unchanged when the CDN is off, misconfigured,
+     * the asset is not a fetchable raster image, or the origin is not
+     * publicly reachable (Cloudinary cannot fetch localhost / *.test).
+     *
+     * @param  string|null  $url
+     * @param  string|null  $transform  override the default transformation string
+     * @return string|null
+     */
+    function cdn_image($url, $transform = null)
+    {
+        if (empty($url) || !is_string($url)) {
+            return $url;
+        }
+
+        // already a data URI or already going through Cloudinary
+        if (str_starts_with($url, 'data:') || str_contains($url, 'res.cloudinary.com/')) {
+            return $url;
+        }
+
+        $cfg = image_cdn_config();
+        if (!$cfg['enabled'] || $cfg['cloud'] === '' || $cfg['provider'] !== 'cloudinary') {
+            return $url;
+        }
+
+        // only raster images (svg / video / docs pass through)
+        $path = parse_url($url, PHP_URL_PATH) ?: $url;
+        if (!preg_match('/\.(jpe?g|png|webp|avif|gif|bmp|tiff?)$/i', $path)) {
+            return $url;
+        }
+
+        // absolutise
+        $abs = str_starts_with($url, 'http://') || str_starts_with($url, 'https://')
+            ? $url
+            : app('url')->asset($url);
+
+        // Cloudinary fetch needs a public origin
+        $host = strtolower((string) parse_url($abs, PHP_URL_HOST));
+        if ($host === '' || in_array($host, ['localhost', '127.0.0.1', '::1'], true)
+            || preg_match('/\.(test|local|localhost|internal)$/', $host)
+            || preg_match('/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/', $host)) {
+            return $url;
+        }
+
+        $t = trim((string) ($transform ?: $cfg['transform']));
+
+        return "https://res.cloudinary.com/{$cfg['cloud']}/image/fetch/{$t}/{$abs}";
+    }
+}
+
 //return file uploaded via uploader
 if (!function_exists('uploaded_asset')) {
     function uploaded_asset($id)
     {
         if (($asset = Upload::find($id)) != null) {
-            return $asset->external_link == null ? my_asset($asset->file_name) : $asset->external_link;
+            $url = $asset->external_link == null ? my_asset($asset->file_name) : $asset->external_link;
+            return cdn_image($url);
         }
         return static_asset('assets/img/placeholder.jpg');
     }
@@ -1218,10 +1301,10 @@ if (!function_exists('my_asset')) {
     function my_asset($path, $secure = null)
     {
         if (config('filesystems.default') != 'local') {
-            return Storage::disk(config('filesystems.default'))->url($path);
+            return cdn_image(Storage::disk(config('filesystems.default'))->url($path));
         }
 
-        return app('url')->asset($path, $secure);
+        return cdn_image(app('url')->asset($path, $secure));
     }
 }
 
@@ -1235,7 +1318,16 @@ if (!function_exists('static_asset')) {
      */
     function static_asset($path, $secure = null)
     {
-        return app('url')->asset($path, $secure);
+        $url = app('url')->asset($path, $secure);
+
+        // Theme images only run through the CDN when explicitly enabled
+        // (never CSS/JS/fonts, and the oversized theme SVGs are skipped
+        // by cdn_image() anyway).
+        if (image_cdn_config()['include_theme'] && preg_match('#(^|/)(assets|uploads)/.+\.(jpe?g|png|webp|gif)$#i', (string) $path)) {
+            return cdn_image($url);
+        }
+
+        return $url;
     }
 }
 

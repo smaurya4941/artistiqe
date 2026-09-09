@@ -2,55 +2,54 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\CollectorRegister;
+use App\Services\ArtCommunityRegistrar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class CollectorRegisterController extends Controller
 {
-    public function create() {
+    public function create()
+    {
         return view('auth.boxed.collector_registration');
     }
 
-    public function store(Request $request)
-{
-    // Validation
-     $request->validate(
-[
-  'first_name' => 'required',
-  'last_name'  => 'required',
-  'email'      => 'required|email|unique:collector_registers,email',
-  'phone'      => 'required|unique:collector_registers,phone',
-  'password'   => 'required',
-],
-[
-  'email.unique' => 'This email is already registered.',
-  'phone.unique' => 'This mobile number is already registered.',
-  'password.required'   => 'Password is required.',
-    'password.confirmed'  => 'Password and Confirm Password must match.',
-]
-);
+    public function store(Request $request, ArtCommunityRegistrar $registrar)
+    {
+        $data = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
+            'phone'      => ['required', 'string', 'max:20', Rule::unique('users', 'phone')],
+            'password'   => 'required|string|min:6|confirmed',
+            'address_line1' => 'nullable|string|max:255',
+            'address_line2' => 'nullable|string|max:255',
+            'city'          => 'nullable|string|max:255',
+            'state'         => 'nullable|string|max:255',
+            'country'       => 'nullable|string|max:255',
+            'zip'           => 'nullable|string|max:20',
+            'journey'       => 'nullable|string',
+            'sell_interest' => 'nullable|string|max:50',
+        ], [
+            'email.unique'       => translate('This email is already registered.'),
+            'phone.unique'       => translate('This mobile number is already registered.'),
+            'password.required'  => translate('Password is required.'),
+            'password.confirmed' => translate('Password and Confirm Password must match.'),
+        ]);
 
-    // Store
-    CollectorRegister::create([
-        'first_name' => $request->first_name,
-        'last_name'  => $request->last_name,
-        'email'      => $request->email,
-        'phone'      => $request->phone,
-        'password'   => Hash::make($request->password),
+        $registrar->register(
+            userType: 'collector',
+            name: trim($data['first_name'] . ' ' . $data['last_name']),
+            email: $data['email'],
+            phone: $data['phone'],
+            plainPassword: $data['password'],
+            profileModel: CollectorRegister::class,
+            profileData: collect($data)->only([
+                'first_name', 'last_name', 'address_line1', 'address_line2',
+                'city', 'state', 'country', 'zip', 'journey', 'sell_interest',
+            ])->toArray(),
+        );
 
-        'address_line1' => $request->address_line1,
-        'address_line2' => $request->address_line2,
-        'city'     => $request->city,
-        'state'    => $request->state,
-        'country'  => $request->country,
-        'zip'  => $request->zip,
-
-        'journey'       => $request->journey,
-        'sell_interest' => $request->sell_interest,
-    ]);
-
-    return redirect()->route('collector.register.success');
-}
+        return redirect()->route('collector.register.success');
+    }
 }

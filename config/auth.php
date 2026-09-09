@@ -46,11 +46,6 @@ return [
         'driver' => 'session',
         'provider' => 'users',
     ],
-
-    'artist' => [
-        'driver' => 'session',
-        'provider' => 'artists',
-    ],
 ],
 
     /*
@@ -87,11 +82,6 @@ return [
     'users' => [
         'driver' => 'eloquent',
         'model' => App\Models\User::class,
-    ],
-
-    'artists' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Artist::class,
     ],
 ],
 

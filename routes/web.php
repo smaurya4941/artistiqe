@@ -71,47 +71,49 @@ use App\Http\Controllers\Artist\ArtworkController;
  Route::get('/search-products', [App\Http\Controllers\ProductSearchController::class, 'index'])
     ->name('search.products');
 
-  Route::get('/artist/artwork/{artwork}/edit',
-    [ArtworkController::class, 'edit']
-)->name('artist.artwork.edit');
+/* ===================== Art Community (artist / collector / gallery) ===================== */
 
-Route::post('/artist/artwork/{artwork}/update',
-    [ArtworkController::class, 'update']
-)->name('artist.artwork.update');
-
-Route::get('/artist/artwork/create',
-    [\App\Http\Controllers\Artist\ArtworkController::class, 'create']
-)->name('artist.artwork.create');
-
-Route::post('/artist/artwork/store',
-    [\App\Http\Controllers\Artist\ArtworkController::class, 'store']
-)->name('artist.artwork.store');
-
-
-Route::prefix('artist')
-    ->middleware('auth:artist')
-    ->name('artist.')
+Route::middleware(['auth', 'user_type:artist'])
+    ->prefix('artist')->name('artist.')
     ->group(function () {
+        Route::controller(\App\Http\Controllers\ArtCommunity\ArtistController::class)->group(function () {
+            Route::get('/dashboard', 'dashboard')->name('dashboard');
+            Route::get('/profile', 'profile')->name('profile');
+            Route::post('/profile', 'updateProfile')->name('profile.update');
+        });
 
-        // Artist Dashboard
-        Route::get('/dashboard', function () {
-            return view('artist.dashboard.index');
-        })->name('dashboard');
-
-        // (optional) Save draft via AJAX
-        Route::post('/artwork/draft', [ArtworkController::class, 'saveDraft'])
-            ->name('artwork.draft');
+        Route::controller(ArtworkController::class)->group(function () {
+            Route::get('/artworks', 'index')->name('artworks.index');
+            Route::get('/artwork/create', 'create')->name('artwork.create');
+            Route::post('/artwork/store', 'store')->name('artwork.store');
+            Route::post('/artwork/draft', 'saveDraft')->name('artwork.draft');
+            Route::get('/artwork/{artwork}/edit', 'edit')->name('artwork.edit');
+            Route::post('/artwork/{artwork}/update', 'update')->name('artwork.update');
+        });
     });
-    
-  Route::get('/login', [LoginController::class, 'showLoginForm'])
+
+Route::middleware(['auth', 'user_type:collector'])
+    ->prefix('collector')->name('collector.')
+    ->controller(\App\Http\Controllers\ArtCommunity\CollectorController::class)
+    ->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/profile', 'profile')->name('profile');
+        Route::post('/profile', 'updateProfile')->name('profile.update');
+    });
+
+Route::middleware(['auth', 'user_type:gallery'])
+    ->prefix('gallery')->name('gallery.')
+    ->controller(\App\Http\Controllers\ArtCommunity\GalleryController::class)
+    ->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/profile', 'profile')->name('profile');
+        Route::post('/profile', 'updateProfile')->name('profile.update');
+    });
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])
     ->name('login');
 
 Route::post('/login', [LoginController::class, 'login']);
-
-
-Route::get('/artist/profile', function () {
-    return view('artist.profile.index');
-})->middleware('auth')->name('artist.profile');
 
 
 Route::get('/gallery/register', [GalleryRegisterController::class, 'create'])

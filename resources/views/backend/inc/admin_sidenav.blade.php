@@ -891,6 +891,52 @@
                 </li>
                 @endcanany
 
+                <!-- Art Community -->
+                @canany(['view_artists', 'view_collectors', 'view_galleries'])
+                @php
+                    $artCommunityPending = \App\Models\Artist::where('status', 'pending')->count()
+                        + \App\Models\CollectorRegister::where('status', 'pending')->count()
+                        + \App\Models\GalleryRegister::where('status', 'pending')->count();
+                @endphp
+                <li class="aiz-side-nav-item">
+                    <a href="#" class="aiz-side-nav-link">
+                        <div class="aiz-side-nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <path d="M8 1.333a2.667 2.667 0 1 0 0 5.334 2.667 2.667 0 0 0 0-5.334ZM3.333 14a.667.667 0 0 1-.666-.667 5.333 5.333 0 0 1 10.666 0 .667.667 0 0 1-.666.667H3.333Z" fill="#575b6a"/>
+                            </svg>
+                        </div>
+                        <span class="aiz-side-nav-text">{{ translate('Art Community') }}</span>
+                        @if($artCommunityPending > 0)
+                            <span class="badge badge-inline badge-warning ml-2">{{ $artCommunityPending }}</span>
+                        @endif
+                        <span class="aiz-side-nav-arrow"></span>
+                    </a>
+                    <ul class="aiz-side-nav-list level-2">
+                        @can('view_artists')
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('admin.artists.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['admin.artists.index', 'admin.artists.show']) }}">
+                                <span class="aiz-side-nav-text">{{ translate('Artists') }}</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('view_collectors')
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('admin.collectors.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['admin.collectors.index', 'admin.collectors.show']) }}">
+                                <span class="aiz-side-nav-text">{{ translate('Collectors') }}</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('view_galleries')
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('admin.galleries.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['admin.galleries.index', 'admin.galleries.show']) }}">
+                                <span class="aiz-side-nav-text">{{ translate('Galleries') }}</span>
+                            </a>
+                        </li>
+                        @endcan
+                    </ul>
+                </li>
+                @endcanany
+
                 <!-- Sellers -->
                 @if (get_setting('vendor_system_activation') == 1)
                 @canany(['view_all_seller','seller_payment_history','view_seller_payout_requests','seller_commission_configuration','view_all_seller_packages','seller_verification_form_configuration','set_category_wise_commission','set_seller_based_commission'])
@@ -1834,7 +1880,7 @@
 
                 <!-- Setup & Configurations -->
                 @canany(['general_settings','features_activation','language_setup','currency_setup','vat_&_tax_setup',
-                'pickup_point_setup','smtp_settings','payment_methods_configurations','order_configuration','file_system_&_cache_configuration',
+                'pickup_point_setup','smtp_settings','payment_methods_configurations','order_configuration','file_system_&_cache_configuration','image_cdn_configuration',
                 'social_media_logins','facebook_chat','facebook_comment','analytics_tools_configuration','google_recaptcha_configuration','google_map_setting',
                 'google_firebase_setting','shipping_configuration','shipping_country_setting','manage_shipping_states','manage_shipping_cities','manage_zones','manage_carriers'])
                 <li class="aiz-side-nav-item">
@@ -1908,6 +1954,13 @@
                             <a href="{{ route('file_system.index') }}" class="aiz-side-nav-link">
                                 <span class="aiz-side-nav-text">{{translate('File System & Cache
                                     Configuration')}}</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('image_cdn_configuration')
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('image_cdn.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['image_cdn.index']) }}">
+                                <span class="aiz-side-nav-text">{{translate('Image CDN')}}</span>
                             </a>
                         </li>
                         @endcan

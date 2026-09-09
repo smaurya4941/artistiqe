@@ -1,4 +1,4 @@
-@extends('artist.layouts.app')
+@extends('art_community.layouts.app', ['role' => 'artist'])
 
 @section('content')
 <div class="artist-dashboard">
