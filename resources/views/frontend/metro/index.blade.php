@@ -370,10 +370,10 @@
   {{ asset('img/logo1.png') }}-->
 <div class="hero-slider">
     <div class="slides">
-        <img src="{{ asset('public/assets/img/banr1.jpeg') }}" class="slide active">
-        <img src="{{ asset('public/assets/img/bnr2.jpeg') }}" class="slide">
-        <img src="{{ asset('public/assets/img/bnr3.jpeg') }}" class="slide">
-        <img src="{{ asset('public/assets/img/bnr4.jpeg') }}" class="slide">
+        <img src="{{ static_asset('assets/img/banr1.jpeg') }}" class="slide active">
+        <img src="{{ static_asset('assets/img/bnr2.jpeg') }}" class="slide">
+        <img src="{{ static_asset('assets/img/bnr3.jpeg') }}" class="slide">
+        <img src="{{ static_asset('assets/img/bnr4.jpeg') }}" class="slide">
     </div>
 
     <!-- Dots -->

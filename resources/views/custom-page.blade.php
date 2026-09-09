@@ -50,15 +50,15 @@
 <div class="container">
  <!-- header LOGO -->
     <div class="logo">
-        <img src="/public/assets/img/Artistiqe_Logo_sd.png" alt="Logo">
+        <img src="{{ static_asset('assets/img/Artistiqe_Logo_sd.png') }}" alt="Logo">
         <h4>Welcomes...</h4>
     </div>
-    
+
     <!-- LEFT SIDE BUTTONS -->
     <div>
-    <a href="/page4"><img src="/public/assets/img/Artistiqe_logo_white.png" alt="artisr 1"></a>
-        <a href="/page5"><img src="/public/assets/img/Artistiqe_black_logo.png" alt="collectr 2"></a>
-        <a href="/page6"><img src="/public/assets/img/Artistiqe_logo_white.png" alt="collecter 3"></a>
+    <a href="/page4"><img src="{{ static_asset('assets/img/Artistiqe_logo_white.png') }}" alt="artisr 1"></a>
+        <a href="/page5"><img src="{{ static_asset('assets/img/Artistiqe_black_logo.png') }}" alt="collectr 2"></a>
+        <a href="/page6"><img src="{{ static_asset('assets/img/Artistiqe_logo_white.png') }}" alt="collecter 3"></a>
 
    
 </div>
