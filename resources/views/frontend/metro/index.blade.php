@@ -887,6 +887,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+{{--
+|--------------------------------------------------------------------------
+| Events & Open Call — TEMPORARILY HIDDEN
+|--------------------------------------------------------------------------
+| Hidden because the 4 cards are hardcoded placeholders whose images do not
+| exist (event-3.jpg / event-4.jpg were never uploaded; Image.svg /
+| Image (1).svg were removed as oversized junk assets).
+|
+| To restore: change `@if (false)` below back to `@if (true)` — or better,
+| replace this block with the admin-managed Events module.
+--}}
+@if (false)
 <section class="events-section">
     <div class="container position-relative">
 
@@ -1028,6 +1040,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderEvents();
 });
 </script>
+@endif
+{{-- /Events & Open Call --}}
 
 
 
